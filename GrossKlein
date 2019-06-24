@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+int main()
+{
+    char stadt [] ="muenchen";
+ char land   []= "bayern";
+    int delta = 'A'-'a';
+    int i;
+    for (i=0 ;i<8;i++){
+            stadt[i]=stadt[i]+delta;
+        printf("%c \n", stadt[i]);
+    }
+    char *p=land;
+    printf ("\n\n\n");
+    while (*p){
+            *p+=delta;
+            printf("%c\n",*p);
+       p++;
+    }
+    printf ("%s \n",land);
+
+
+    return 1;
+
+}
