@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+
+   FILE *handle;
+   handle =fopen("C:\\Test\\TestJava1.txt","w");
+
+   int result;
+   result= fputc('A', handle);
+   if (result == EOF){
+        printf("Error: das Schreiben ist schiefgegangen");
+        return 1;
+   }
+
+   result= fclose(handle);
+   if ( result == EOF){
+    printf("Error: Das File konnte nicht geschlossen werden");
+    return 1;
+   }
+
+
+  printf("Erfolg \n");
+    return 0;
+}
