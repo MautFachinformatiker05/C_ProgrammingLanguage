@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define Hodor {
+#define hodoR }
+#define hodor int
+#define HODOR main
+#define HOdor (
+#define hodOR )
+#define  hodorhodor  printf("HoDoR!\n");
+#define hodorhodorhodor return 0;
+
+hodor HODOR HOdor hodOR
+Hodor
+hodorhodor
+hodorhodorhodor
+hodoR
