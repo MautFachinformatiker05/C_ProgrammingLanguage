@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+double fn(double a);
+
+int daten[10000];
+
+struct meineStruct {
+    int ersterInt;
+    int zweiterInt;
+};
+
+int main()
+{
+    int i;
+    for(i=0; i<4096; i++) {
+
+        char *m = malloc(1048576);
+        if (m == NULL) {
+            printf("Kein Speicher mehr!\n");
+            break;
+        }
+        for(int j=0; j<1048576; j += 1024) {
+            *(m + j) = 1;
+            // free(m);
+        }
+        printf("i=%d m=%p\n",i,m);
+    }
+    getchar();
+    return 1;
+}
+
