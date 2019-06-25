@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int fileSchreiben(char *filename);
+int fileLesen(char *filename);
+
+int main()
+{
+    char *filename = "Z:\\____Oppitz\\ProgrammingC\\FileReadWrite\\bin\\Debug\\FileReadWrite.exe";
+
+    printf("Hexdump der Datei %s\n", filename);
+
+    fileLesen(filename);
+}
+
+int fileLesen(char *filename) {
+
+    FILE *fp;
+    if ( NULL == (fp = fopen(filename, "rb"))) {
+        goto fehler;
+    }
+
+    unsigned int buchstabe;
+    unsigned char zeilenpuffer[16];
+    int count = 0;
+    int offset = 0;
+
+    while(1) {
+
+        buchstabe = fgetc(fp);
+        zeilenpuffer[count] = buchstabe;
+        count++;
+        offset++;
+
+        if ((count == 16) || (buchstabe == EOF)) {
+
+            printf("%08x ", offset - 16);
+
+            for(int i = 0; i < count; i++) {
+                 printf("%c",  (zeilenpuffer[i] > 32) ? zeilenpuffer[i] : '.');
+            }
+            printf("  ");
+            for(int i = 0; i < count; i++) {
+                 printf("%02x ", ((int)zeilenpuffer[i]) & 0xff );
+            }
+            printf("\n");
+
+            if (buchstabe == EOF) {
+                break;
+            }
+            count = 0;
+        }
+    }
+
+     if (EOF == fclose(fp)) {
+        goto fehler;
+    };
+
+    return 0;
+
+    fehler:
+
+    return 1;
+}
+
+int fileSchreiben(char *filename) {
+
+    FILE *fp;
+    if ( NULL == (fp = fopen(filename, "w"))) {
+        goto fehler;
+    }
+
+    char *name = "Oliver";   // O l i v e r 0
+
+    for(char *b = name; (*b); b++) {
+      if (EOF == fputc(*b, fp)){
+          goto fehler;
+      }
+    }
+    if (EOF == fclose(fp)) {
+        goto fehler;
+    };
+
+    printf("Erfolg!");
+    return 0;
+
+fehler:
+    printf("Ein Fehler ist passiert");
+    return 1;
+}
