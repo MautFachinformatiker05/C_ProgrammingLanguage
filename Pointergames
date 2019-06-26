@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void berechneDreiWerte(int n, int *pi, float *pf, double *pd);
+int *geheimeKonstante();
+
+int main()
+{
+    int ergebnisA;
+    float ergebnisB;
+    double ergebnisC;
+
+    berechneDreiWerte(42, &ergebnisA, &ergebnisB, &ergebnisC);
+    printf("a=%d,\nb=%f,\nc=%f \n", ergebnisA, ergebnisB, ergebnisC);
+
+    int *px = geheimeKonstante();
+    int magischeKonstante = *px;
+    printf("magischeKonstante = %d", magischeKonstante);
+
+    return 0;
+}
+
+int *geheimeKonstante() {
+
+    int x = 384389;
+    return &x;
+
+}
+
+void berechneDreiWerte(int n, int *pi, float *pf, double *pd) {
+
+    int a = n << 8;
+    float b = n << 9;
+    double c = n << 10;
+
+    *pi = a;
+    *pf = b;
+    *pd = c;
+
+}
