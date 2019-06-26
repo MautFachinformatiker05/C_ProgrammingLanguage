@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct dreiWerte {
+
+    int a;    // 4 Byte
+    float b;  // 4 Byte
+    double c; // 64bit  = 8Byte
+    char x;   // 1 Byte
+    char y;
+    char z;
+};
+
+
+union dreiInEins {
+    int a;
+    char array[4];
+};
+
+void berechneDreiWerte(int n, struct dreiWerte *ps);
+struct dreiWerte versionMichael(int n);
+
+int main()
+{
+    union dreiInEins meineUnion;
+    meineUnion.a = 0x12345678;
+    printf("meineUnion.a = %x\n", meineUnion.a);
+
+    meineUnion.array[1] = 0;
+    meineUnion.array[2] = 0xff;
+
+    printf("meineUnion.a = %x\n", meineUnion.a);
+
+    struct dreiWerte meineDreiWerte;
+    meineDreiWerte.a = 1;
+    meineDreiWerte.b = 2.0;
+    meineDreiWerte.c = 16.0;
+
+    #define MICHAEL
+    #ifdef MICHAEL
+     meineDreiWerte = versionMichael(42);
+    #else
+        berechneDreiWerte(42, &meineDreiWerte);
+    #endif // MICHAEL
+
+    printf("a=%d,\nb=%f,\nc=%f \n", meineDreiWerte.a, meineDreiWerte.b, meineDreiWerte.c);
+
+    printf("\nsizeof(meineDreiWerte) = %d", sizeof(meineDreiWerte));
+
+    return 0;
+}
+
+struct dreiWerte versionMichael(int n) {
+
+    int a = n << 8;
+    float b = n << 9;
+    double c = n << 10;
+
+    struct dreiWerte str;
+    str.a = a;
+    str.b = b;
+    str.c = c;
+
+    return str;
+}
+
+void berechneDreiWerte(int n, struct dreiWerte *ps) {
+
+    int a = n << 8;
+    float b = n << 9;
+    double c = n << 10;
+
+    ps->a = a;
+    ps->b = b;
+    ps->c = c;
+
+}
