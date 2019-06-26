@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// GFI_LOGO, OLI_LOGO
+#define OLI_LOGO
+
+int main()
+{
+
+
+
+    // 9 x 19
+     //123456789012345678
+ #ifdef GFI_LOGO
+  a[0]="                   ";
+  a[1]="  xxxxx  xxxxx xxx ";
+  a[2]=" x       x      x  ";
+  a[3]=" x       x      x  ";
+  a[4]=" x  xxx  xxxxx  x  ";
+  a[5]=" x    x  x      x  ";
+  a[6]=" x    x  x      x  ";
+  a[7]="  xxxx   x     xxx ";
+  a[8]="                  ";
+#endif // 0
+
+char *a[9];
+#ifdef OLI_LOGO
+  a[0]="                   ";
+  a[1]="  xxxxx   xxxxx    ";
+  a[2]=" x     x x     x   ";
+  a[3]=" x     x x     x   ";
+  a[4]=" x     x x     x   ";
+  a[5]=" x     x x     x   ";
+  a[6]=" x     x x     x   ";
+  a[7]="  xxxxx   xxxxx    ";
+  a[8]="                   ";
+#endif
+
+
+  printf("i G[]={");
+
+  for(int i=8; i>=0; i--) {
+    unsigned value = 0;
+    int factor = 1;
+    for(int j=18; j>=0; j--) {
+        if (a[i][j]=='x') {
+            value += factor;
+        }
+        factor = factor * 2;
+    }
+    printf("%d, ", value);
+  }
+  printf("}");
+
+  return 0;
+
+}
