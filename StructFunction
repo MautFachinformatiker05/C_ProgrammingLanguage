@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct person{
+ char *vorname;
+ char *nachname;
+ unsigned int alter;
+};
+void ausgabe (struct person *ps);
+int main()
+{
+    struct person manuel;
+    manuel.vorname="Manuel";
+    manuel.nachname="Unv";
+    manuel.alter=99;
+
+    struct person hans = {"Hans","Liebl",35};
+    ausgabe(&manuel);
+    printf("\n");
+    ausgabe (&hans);
+
+    return 0;
+}
+
+void ausgabe (struct person *ps){
+    printf("Der Vorname ist %s \n", ps -> vorname);
+    printf("Der Nachname ist %s \n", ps -> nachname);
+    printf("Das Alter ist %d \n", ps -> alter);
+
+}
