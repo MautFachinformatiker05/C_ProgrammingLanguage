@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+int system(const char*);
+void wordcounter(char*);
+int lesedatei();
+
+int main(int argc, char *argv[])
+{
+    for (int i=1;i<argc;i++){
+           wordcounter(argv[i]);
+            }
+            lesedatei();
+}
+void wordcounter (char *fp){
+        char cmdline[200] ="powershell -Command \" &{Get-Content '";
+        strcat( cmdline , fp);
+        strcat(cmdline,"\' |  Measure-Object -Word} \" ");
+        strcat(cmdline," >> stdin.txt");
+        system(cmdline);
+
+
+}
+
+int lesedatei (){
+                char text[100];
+               FILE *handle;
+            handle =fopen("stdin.txt","r");
+             fgets(text,100,handle);
+             fgets(text,100,handle);
+             fgets(text,100,handle);
+             fgets(text,100,handle);
+
+             printf("%s",text);
+               return 1;
+
+               }
+
+
