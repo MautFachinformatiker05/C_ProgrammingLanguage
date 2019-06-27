@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int x;
+char y;
+
+typedef unsigned char byte;
+byte z;
+
+typedef char KURZERSTRING[30];
+typedef char LANGERSTRING[1024];
+
+typedef struct Person {
+
+    KURZERSTRING nachname;
+    KURZERSTRING vorname;
+    LANGERSTRING lebenslauf;
+    int alter;
+
+} PERSON;
+
+void druckePerson(PERSON *pp);
+void druckeKurzenString(KURZERSTRING k);
+void druckeLangenString(LANGERSTRING l);
+
+int main()
+{
+    PERSON steve;
+
+    printf("Enter your first name:");
+    scanf("%s", steve.vorname);
+
+    printf("Enter your surname:");
+    scanf("%s", steve.nachname);
+
+    steve.alter = 56;
+    // LANGERSTRING  = char *
+    strcpy((char *)&steve.lebenslauf, "So gründeten Steve Jobs und Steve Wozniak gemeinsam mit Ronald Wayne im Jahre 1976 in einer Garage in Palo Alto ihre erste eigene Firma, die Apple Computer Company. Das erste Produkt war der Heimcomputer Apple I. Nach mehreren Verbesserungsstufen wurde die Firma 1980 in eine Kapitalgesellschaft umgewandelt.");
+
+    druckePerson(&steve);
+
+    return 0;
+}
+
+void druckePerson(PERSON *pp) {
+
+   printf("Hallo ");
+   druckeKurzenString(pp->vorname);
+   druckeKurzenString(pp->nachname);
+   printf("Sie sind %d Jahre alt!\n", pp->alter);
+
+   printf("Ihr Lebenslauf:");
+   druckeLangenString(pp->lebenslauf);
+
+}
+
+void druckeKurzenString(KURZERSTRING k) {
+
+    printf("%s", (char *)k);
+}
+
+
+
+void druckeLangenString(LANGERSTRING l) {
+
+   printf("%s", (char *)l);
+}
